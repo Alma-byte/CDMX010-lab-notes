@@ -4,12 +4,11 @@ import {
    BrowserRouter as Router,
    Switch,
    Route,
-   Link
  } from "react-router-dom";
  import Home from './Pages/Homee';
  import Note from './Pages/Notee';
  import NoteEdit from './Pages/NoteEdit';
-
+ import { db } from './firebase'
 
 function App() {
   return (
@@ -20,7 +19,7 @@ function App() {
          <Note />
        </Route>
        <Route path="/NoteEdit">
-         <NoteEdit />
+         <NoteEdit db={db}/>
        </Route>
        <Route path="/">
          <Home />

@@ -1,9 +1,15 @@
 import React from "react";
+import NoteEdit from "./NoteEdit"
+import {db} from "../firebase"
 
-function Note() {
+const Note = () => {
+
     return (
-          <h1>Hola</h1>
+      <div>
+        <NoteEdit db={db} />
+        <h1>Nota</h1>
+      </div>
     );
-  }
+};
 
 export default Note;
