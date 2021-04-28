@@ -1,37 +1,43 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router";
 
-const NoteEdit = (props) =>{  
+const NoteEdit = (props) => {
+
+  const history = useHistory();
+ 
   const inicialStatateValues = {
-    name:"",
-    note:"",
+    name: "",
+    note: "",
   };
 
   const [values, setValues] = useState(inicialStatateValues);
-  
-  const Saveinputchange = (e) =>{
-    const { name, value} = e.target;
+
+  const Saveinputchange = (e) => {
+    const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
 
   const savefarebase = (e) => {
     e.preventDefault();
     props.db.collection('notes').add(values);
-    
-  };
+    history.push("/Note")
 
-    return (
-          <form className="note-body" onSubmit={savefarebase}>
-            <div className= "note-group">
-            <input type="text" className= "note-control" placeholder="NOTA"  name="name" onChange= {Saveinputchange} />
-            </div>
-            <div className= "note-text">
-              <textarea name="note" cols="20" rows="10" onChange= {Saveinputchange} ></textarea>
-            </div>
-            <button className="btnsave">
-              CREAR NOTA
+};
+
+  return (
+    <form className="note-body" onSubmit={savefarebase}>
+      <div className="note-group">
+        <input type="text" className="note-control" placeholder="NOTA" name="name" onChange={Saveinputchange} />
+      </div>
+      <div className="note-text">
+        <textarea name="note" cols="20" rows="10" onChange={Saveinputchange} ></textarea>
+      </div>
+      <button className="btnsave" type= "submit">
+        CREAR NOTA
             </button>
-          </form>
-    );
-  }
+    </form>
+  );
+}
 
 export default NoteEdit;
+
