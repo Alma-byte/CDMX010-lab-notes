@@ -1,6 +1,7 @@
 import Inicio from './Inicio';
 import logo from '../Assets/logo.jpg';
 import React from "react";
+import './Styles/Homee.css';
 
 
 function Homee() {
@@ -12,7 +13,7 @@ function Homee() {
        <div className="Fraseinicio">
           <h1>Crea notas, edita, ordena y elimina</h1>
        </div>
-       <Inicio />
+       <Inicio/>
        </div>
     );
   }
