@@ -41,7 +41,7 @@ const Note = () => {
           <div className="card" key={nota.id}>
             <div className="card-body">             
                 <h2>{nota.name} <i className="material-icons"
-                  onClick={() => noteDelete(nota.id)}>delete</i></h2>           
+                  onClick={() => noteDelete(nota.id)}>delete</i><i className="material-icons">created</i></h2>           
               <p>{nota.note}</p>
             </div>
           </div>
