@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase"
 import { useHistory } from "react-router";
-import NoteEdit from "./NoteEdit";
+import './Styles/Notee.css';
 
 
 const Note = () => {
@@ -50,27 +50,29 @@ const Note = () => {
 
   return (
     <div>
-      <NoteEdit {...{ addNotes, editId, Notes, db }} />
-      <div className="col-md-8">
+      <div className="Notas">
         {Notes.map(nota => (
-          <div className="card" key={nota.id}>
-            <div className="card-body">
+          <div className="CardBody" key={nota.id}>
+            <div className="Card">
               <h2>{nota.name} <i className="material-icons"
                 onClick={() => noteDelete(nota.id)}>delete</i>
-                <i className="material-icons" onClick={() => setEditId(nota.id)}>created</i></h2>
+                <i className="material-icons" onClick={() => {
+                  //setEditId(nota.id)
+                  history.push(`/NoteEdit/${nota.id}`)
+                }}>created</i></h2>
+
               <p>{nota.note}</p>
             </div>
           </div>
         ))}
       </div>
-      <div className="NOTAS">
-        <button className="btncrear" type="submit" onClick={historyWindow}>+</button>
+      <footer>
+      <div className="Crear">
+        <button className="Btncrear" type="submit" onClick={historyWindow}>+</button>
       </div>
+      </footer>
     </div>
   );
 };
 
 export default Note;
-
-
-

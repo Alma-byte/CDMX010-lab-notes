@@ -1,29 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { db } from "../firebase";
 
+const inicialStatateValues = {
+  name: "",
+  note: "",
+};
+
 const NoteEdit = (props) => {
-
-  const history = useHistory();
-
-  const inicialStatateValues = {
-    name: "",
-    note: "",
-  };
-
   const [values, setValues] = useState(inicialStatateValues);
+  let { id } = useParams();
+  const history = useHistory();
+  const [status, setStatus] = useState('pending')
 
   const Saveinputchange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value })
   };
 
-  const savefarebase = async (e) => {
+  const saveOrEdit =  (e) => {
     e.preventDefault();
-    //props.db.collection('notes').add(values);
-    await props.addNotes(values);
-    setValues({ ...inicialStatateValues })
-    // history.push("/Note")
+    if (id) {
+      props.db.collection('notes').doc(id).update(values)
+        .then(() => {
+          setStatus('success')
+        })
+        .catch(() => {
+          setStatus('error')
+        })
+    } else {
+      props.db.collection('notes').add(values)
+      .then(() =>{
+        history.push("/Note")
+      })
+      .catch(() => {
+        setStatus('error')
+      })
+    }
   };
 
   const getNoteById = async (id) => {
@@ -32,28 +45,29 @@ const NoteEdit = (props) => {
   }
 
   useEffect(() => {
-    if (props.editId === '') {
-      setValues({ ...inicialStatateValues })
-    } else {
-      getNoteById(props.editId);
+    if (id) {
+      getNoteById(id);
     }
-
-  }, [props.editId]);
+  }, [id]);
 
   return (
-    <form className="note-body" onSubmit={savefarebase}>
+    <form className="note-body" onSubmit={saveOrEdit}>
       <div className="note-group">
         <input type="text" className="note-control" placeholder="NOTA" name="name" onChange={Saveinputchange} value={values.name} />
       </div>
       <div className="note-text">
-        <textarea name="note" cols="20" rows="10" onChange={Saveinputchange} value={values.note}></textarea>
+        <textarea name="note" cols="50" rows="10" onChange={Saveinputchange} value={values.note}></textarea>
       </div>
+      {status === 'success' && <p>La nota fue actualizada con exito!</p>}
+      {status === 'error' && <p>Oops! Hubo un error al intentar ejecutar tu accion</p>}
       <button className="btnsave" type="submit">
-        {props.editId === '' ? 'Save' : 'Update'}
+        {id ? 'Update' : 'Save'}
+        {/* falsy values => false, '', "", null, undefined, 0  */}
+        {/* truthy values todos los que no sean falsy values  */}
       </button>
+      <button onClick ={() => history.goBack() }>Notas</button>
     </form>
   );
 }
 
 export default NoteEdit;
-
