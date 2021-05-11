@@ -16,14 +16,17 @@ function App() {
       <div className="cointainer-btn">
 
         <Switch>
-          <Route path="/Note">
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/Note" exact>
             <Note />
           </Route>
-          <Route path="/NoteEdit">
+          <Route path="/NoteEdit" exact>
             <NoteEdit db={db} />
           </Route>
-          <Route path="/">
-            <Home />
+          <Route path="/NoteEdit/:id">
+            <NoteEdit db={db} />
           </Route>
         </Switch>
       </div>
