@@ -1,5 +1,34 @@
-.Paginainicio{
-    width: 100%;
-    background-color: blueviolet;
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
 
+
+.App{
+    position: relative;
+    width: 414px;
+    height: 736px;
+    position: absolute;
+    background: linear-gradient(180deg, #83318B 0%, rgba(255, 255, 255, 0) 100%), #803388;
 }
+
+.Fraseinicio{
+    position: absolute;
+    width: 343px;
+    height: 237px;
+    left: 36px;
+    top: 274px;
+    font-family: 'Architects Daughter', cursive;
+    color: #FFFEFF;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.Paginainicio{
+    position: absolute;
+    width: 114px;
+    height: 139px;
+    left: 150px;
+    top: 112px;     
+}
+
+

@@ -1,6 +1,8 @@
 
 import React from 'react';
 import { useHistory } from "react-router";
+import './Styles/Inicio.css';
+
 
 
 function Inicio(props) {
@@ -18,7 +20,7 @@ function Inicio(props) {
         </div>
         <div className="Inicioapp">
           <button onClick={historyWindow}
-            className="buttonInicio">imgdeapp</button>
+            className="ButtonInicio">CREATIVE</button>
         </div>
       </div>
     </div>

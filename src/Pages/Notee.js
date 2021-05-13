@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase"
 import { useHistory } from "react-router";
 import './Styles/Notee.css';
+import creative from '../Assets/creative.jpg';
+
 
 
 const Note = () => {
@@ -50,26 +52,28 @@ const Note = () => {
 
   return (
     <div>
+       <header>
+        <img src={creative} width="100%" height="100%" alt="el pinche logo"></img>
+      </header>
       <div className="Notas">
         {Notes.map(nota => (
           <div className="CardBody" key={nota.id}>
-            <div className="Card">
+               <div className="Card">
               <h2>{nota.name} <i className="material-icons"
                 onClick={() => noteDelete(nota.id)}>delete</i>
                 <i className="material-icons" onClick={() => {
-                  //setEditId(nota.id)
                   history.push(`/NoteEdit/${nota.id}`)
                 }}>created</i></h2>
-
+                
               <p>{nota.note}</p>
             </div>
-          </div>
+            </div>
         ))}
-      </div>
+       </div>
       <footer>
       <div className="Crear">
-        <button className="Btncrear" type="submit" onClick={historyWindow}>+</button>
-      </div>
+        <button className="Btncrear" type="submit" onClick={historyWindow}>CREAR</button>
+        </div>
       </footer>
     </div>
   );
